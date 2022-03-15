@@ -19,6 +19,16 @@ main {
 footer {
   grid-area: footer;
   background: #000;
-  padding: 1rem;
+  padding: .75rem;
   color: #fff;
+}
+
+.breadcrumb, .jumbotron {
+  background: none !important;
+
+}
+
+ textarea.form-control {
+  padding : 0 !important;
+  margin: 0 1rem !important;
 }
