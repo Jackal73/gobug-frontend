@@ -33,7 +33,7 @@ export const Ticket = () => {
           <div className="status">Status : {ticket.status}</div>
         </Col>
         <Col className="text-right">
-          <Button variant="outline-info">
+          <Button variant="outline-info" style={{borderRadius: '.4rem'}}>
             Close Ticket
           </Button>
         </Col>

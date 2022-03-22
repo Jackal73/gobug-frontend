@@ -6,7 +6,7 @@ import tikLogo from '../../assets/img/tikLogo.png'
 export const Header = () => {
   return <Navbar collapseOnSelect bg="info" variant="dark" expand="md">
     <Navbar.Brand>
-      <img src={tikLogo} className="" alt="logo" width="130px" />
+      <img src={tikLogo} className="" alt="logo" width="150px" />
 
     </Navbar.Brand>
     <Navbar.Toggle aria_controls = "basic-navbar-nav" />
