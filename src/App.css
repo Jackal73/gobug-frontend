@@ -1,5 +1,5 @@
 .default-layout {
-  display: grid;
+  /* display: grid; */
   grid-template-rows: 80px auto 3rem;
   grid-template-areas:
   "header"
@@ -24,11 +24,10 @@ footer {
 }
 
 .breadcrumb, .jumbotron {
-  background: none !important;
-
+  background-color: none !important;
 }
 
- textarea.form-control {
+textarea.form-control {
   padding : 0 !important;
   margin: 0 1rem !important;
 }
