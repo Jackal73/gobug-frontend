@@ -17,7 +17,7 @@ export const Header = () => {
       </Navbar.Brand>
         <Navbar.Toggle aria_controls = "basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto ">
+          <Nav className="ml-auto">
 
             <LinkContainer to="/dashboard">
               <Nav.Link>Dashboard</Nav.Link>
