@@ -10,13 +10,15 @@ import {
   Alert
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { userLogin } from '../../api/userApi';
 import { loginPending, loginFail, loginSuccess } from './loginSlice';
+import { getUserProfile } from '../../pages/dashboard/userAction';
 
 export const LoginForm = ({ formSwitcher }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+
 
   const { isLoading, isAuth, error } = useSelector(state => state.login);
 
@@ -50,20 +52,19 @@ export const LoginForm = ({ formSwitcher }) => {
     dispatch(loginPending());
 
     try {
-      const isAuth = await userLogin({ email,password });
-      console.log(isAuth);
+      const isAuth = await userLogin({ email, password });
 
       if (isAuth.status === "error") {
         return dispatch(loginFail(isAuth.message));
       }
 
       dispatch(loginSuccess());
+      dispatch(getUserProfile());
       history.push('/dashboard');
     } catch (error) {
       dispatch(loginFail(error.message));
     }
   };
-
 
   return (
     <Container>
