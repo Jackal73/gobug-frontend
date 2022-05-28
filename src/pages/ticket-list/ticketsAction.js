@@ -1,11 +1,13 @@
+import { getAllTickets, getSingleTicket } from '../../api/ticketApi';
 import {
-  fetchTicketLoading,
+  fetchSingleTicketLoading,
+  fetchSingleTicketsFail,
+  fetchSingleTicketsSuccess, fetchTicketLoading,
   fetchTicketsFail,
   fetchTicketsSuccess,
   searchTickets
 } from './ticketsSlice';
 
-import { getAllTickets } from '../../api/ticketApi';
 
 export const fetchAllTickets = () => async (dispatch) => {
   dispatch(fetchTicketLoading());
@@ -20,3 +22,15 @@ export const fetchAllTickets = () => async (dispatch) => {
 export const filterSearchTicket = (str) => (dispatch) => {
   dispatch(searchTickets(str));
 };
+
+// Actions for single ticket only
+export const fetchSingleTicket = (_id) => async (dispatch) => {
+  dispatch(fetchSingleTicketLoading());
+  try {
+    const result = await getSingleTicket(_id);
+    dispatch(fetchSingleTicketsSuccess(result.data.result[0]));
+  } catch (error) {
+    dispatch(fetchSingleTicketsFail(error.message));
+  }
+};
+
