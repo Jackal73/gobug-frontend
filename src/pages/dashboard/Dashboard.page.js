@@ -5,10 +5,6 @@ import tickets from '../../assets/data/dummy-tickets.json';
 import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.comp';
 import { Link } from 'react-router-dom';
 
-
-
-
-
 export const Dashboard = () => {
   return (
     <Container>

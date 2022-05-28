@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Col,
@@ -19,11 +19,15 @@ export const LoginForm = ({ formSwitcher }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const { isLoading, isAuth, error } = useSelector((state) => state.login);
 
-  const { isLoading, isAuth, error } = useSelector(state => state.login);
+  useEffect(() => {
+    sessionStorage.getItem('accessJWT') && history.push('/dashboard');
+  }, [history, isAuth]);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  const [email, setEmail] = useState('tommyt@kbldesigners.com');
+  const [password, setPassword] = useState('password2');
 
   const handleOnChange =e => {
     const {name, value} = e.target;

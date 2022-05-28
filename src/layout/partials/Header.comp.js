@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { userLogout } from "../../api/userApi";
 import tikLogo from '../../assets/img/tikLogo.png';
 
 export const Header = () => {
@@ -9,14 +10,18 @@ export const Header = () => {
 
   const logMeOut = () => {
     sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("tikkit");
+    userLogout();
     history.push("/");
   };
+
   return (
     <Navbar collapseOnSelect bg="info" variant="dark" expand="md">
-      <Navbar.Brand>
-        <img src={tikLogo} className="" alt="logo" width="150px" />
-      </Navbar.Brand>
-        <Navbar.Toggle aria_controls = "basic-navbar-nav" />
+
+        <Navbar.Brand>
+          <img src={tikLogo} className="" alt="logo" width="150px" />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
 
@@ -29,9 +34,10 @@ export const Header = () => {
             </LinkContainer>
 
             <Nav.Link onClick={logMeOut}>Logout</Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
+
     </Navbar>
+
   );
 };
