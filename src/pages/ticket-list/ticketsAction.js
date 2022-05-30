@@ -1,10 +1,17 @@
-import { getAllTickets, getSingleTicket } from '../../api/ticketApi';
+import { getAllTickets, getSingleTicket, updateReplyTicket, updateTicketStatusClosed } from '../../api/ticketApi';
 import {
   fetchSingleTicketLoading,
   fetchSingleTicketsFail,
-  fetchSingleTicketsSuccess, fetchTicketLoading,
+  fetchSingleTicketsSuccess,
+  fetchTicketLoading,
   fetchTicketsFail,
   fetchTicketsSuccess,
+  replyTicketFail,
+  replyTicketLoading,
+  replyTicketSuccess,
+  closeTicketLoading,
+  closeTicketSuccess,
+  closeTicketFail,
   searchTickets
 } from './ticketsSlice';
 
@@ -28,9 +35,52 @@ export const fetchSingleTicket = (_id) => async (dispatch) => {
   dispatch(fetchSingleTicketLoading());
   try {
     const result = await getSingleTicket(_id);
-    dispatch(fetchSingleTicketsSuccess(result.data.result[0]));
+    dispatch(
+      fetchSingleTicketsSuccess(
+      result.data.result.length && result.data.result[0]
+      )
+    );
   } catch (error) {
-    dispatch(fetchSingleTicketsFail(error.message));
+    dispatch(
+      fetchSingleTicketsFail(error.message));
+  }
+};
+
+// Actions for replying on single ticket
+export const replyOnTicket = (_id, msgObj) => async (dispatch) => {
+  dispatch(replyTicketLoading());
+  try {
+    const result = await updateReplyTicket(_id, msgObj);
+    console.log(result);
+    if(result.status === "error") {
+      return dispatch(replyTicketFail(result.message));
+    }
+
+    dispatch(fetchSingleTicket(_id));
+
+    dispatch(replyTicketSuccess(result.message));
+  } catch (error) {
+    console.log(error.message);
+    dispatch(replyTicketFail(error.message));
+  }
+};
+
+// Actions for replying on single ticket
+export const closeTicket = (_id) => async (dispatch) => {
+  dispatch(closeTicketLoading());
+  try {
+    const result = await updateTicketStatusClosed(_id);
+    console.log(result);
+    if(result.status === "error") {
+      return dispatch(closeTicketFail(result.message));
+    }
+
+    dispatch(fetchSingleTicket(_id));
+
+    dispatch(closeTicketSuccess(result.message));
+  } catch (error) {
+    console.log(error.message);
+    dispatch(closeTicketFail(error.message));
   }
 };
 

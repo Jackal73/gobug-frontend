@@ -2,31 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row, Button, Spinner, Alert } from 'react-bootstrap';
 import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.comp';
-import { fetchSingleTicket } from '../ticket-list/ticketsAction';
+import { fetchSingleTicket, closeTicket } from '../ticket-list/ticketsAction';
 import { MessageHistory } from '../../components/message-history/MessageHistory.comp';
 import { UpdateTicket } from '../../components/update-ticket/UpdateTicket.comp';
 import { useParams } from 'react-router-dom';
 
 // const ticket = tickets[0];
 export const Ticket = () => {
+  const {replyMsg} = useSelector(state => state.tickets);
   const {tId} = useParams();
   const dispatch = useDispatch();
   const { isLoading, error, selectedTicket} = useSelector(state => state.tickets);
 
-  const [message, setMessage] = useState('');
-  const [ticket, setTicket] = useState('');
-
   useEffect(() => {
     dispatch(fetchSingleTicket(tId))
-}, [message, tId, dispatch]);
+}, [tId, dispatch]);
 
-  const handleOnChange = (e) => {
-    setMessage(e.target.value);
-  };
-
-  const handleOnSubmit = () => {
-    alert('Form submission!')
-  }
   return (
     <Container>
       <Row>
@@ -38,6 +29,7 @@ export const Ticket = () => {
         <Col>
           {isLoading && <Spinner variant='primary' animation="border" />}
           {error && <Alert variant='danger'>{error}</Alert>}
+          {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
         </Col>
       </Row>
 
@@ -45,11 +37,16 @@ export const Ticket = () => {
         <Col className="font-weight-bolder text-secondary">
         {/* {tId} */}
           <div className="subject">Subject : {selectedTicket.subject}</div>
-          <div className="date">Ticket Opened : {selectedTicket.openAt}</div>
+          <div className="date">Ticket Opened : {selectedTicket.openAt && new Date(selectedTicket.openAt).toLocaleString()}</div>
           <div className="status">Status : {selectedTicket.status}</div>
         </Col>
         <Col className="text-right">
-          <Button variant="outline-info" style={{borderRadius: '.4rem'}}>
+          <Button
+            variant="outline-info"
+            onClick={() => dispatch(closeTicket(tId))}
+            style={{borderRadius: '.4rem'}}
+            disabled = {selectedTicket.status === "Closed"}
+          >
             Close Ticket
           </Button>
         </Col>
@@ -62,10 +59,8 @@ export const Ticket = () => {
 
       <Row className="mt-4">
         <Col>
-          <UpdateTicket
-            msg={message}
-            handleOnChange={handleOnChange}
-            handleOnSubmit={handleOnSubmit}
+          <UpdateTicket _id= {tId}
+
           />
         </Col>
       </Row>
