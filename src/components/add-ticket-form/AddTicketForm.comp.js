@@ -1,6 +1,6 @@
 // import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Form, Jumbotron, Row, Spinner, Alert } from 'react-bootstrap';
+import { Alert, Button, Col, Form, Jumbotron, Row, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { shortText } from '../../utils/validation';
 import "./add-ticket-form.style.css";
