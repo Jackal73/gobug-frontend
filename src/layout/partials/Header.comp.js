@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { userLogout } from "../../api/userApi";
@@ -17,7 +17,6 @@ export const Header = () => {
 
   return (
     <Navbar collapseOnSelect bg="info" variant="dark" expand="md">
-
         <Navbar.Brand>
           <img src={tikLogo} className="" alt="logo" width="150px" />
         </Navbar.Brand>
@@ -36,8 +35,6 @@ export const Header = () => {
             <Nav.Link onClick={logMeOut}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-
     </Navbar>
-
   );
 };

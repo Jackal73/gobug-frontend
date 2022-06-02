@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { shortText } from '../../utils/validation';
 import "./add-ticket-form.style.css";
 import { openNewTicket } from './addTicketAction';
+import { resetSuccessMsg } from './addTicketSlicer';
 
 
 const initialFrmDt = {
@@ -33,8 +34,10 @@ export const AddTicketForm = () => {
   const [frmDataError, setFrmDataError] = useState(initialFrmError);
 
   useEffect(() => {
-
-  }, [frmData, frmDataError]);
+    return () => {
+      successMsg && dispatch(resetSuccessMsg());
+    };
+  }, [dispatch, frmData, frmDataError, successMsg]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

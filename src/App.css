@@ -1,6 +1,6 @@
 .default-layout {
   /* display: flex; */
-  display: grid;
+  display: block;
   grid-template-rows: 80px auto 3rem;
   grid-template-areas:
   "header"

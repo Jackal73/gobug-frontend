@@ -6,16 +6,27 @@ import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.comp';
 import { MessageHistory } from '../../components/message-history/MessageHistory.comp';
 import { UpdateTicket } from '../../components/update-ticket/UpdateTicket.comp';
 import { closeTicket, fetchSingleTicket } from '../ticket-list/ticketsAction';
+import { resetResponseMsg } from '../ticket-list/ticketsSlice';
 
 // const ticket = tickets[0];
 export const Ticket = () => {
   const {tId} = useParams();
   const dispatch = useDispatch();
-  const { isLoading, error, selectedTicket, replyMsg, replyTicketError} = useSelector(state => state.tickets);
+  const {
+    isLoading,
+    error,
+    selectedTicket,
+    replyMsg,
+    replyTicketError
+  } = useSelector(state => state.tickets);
 
   useEffect(() => {
-    dispatch(fetchSingleTicket(tId))
-}, [tId, dispatch]);
+    dispatch(fetchSingleTicket(tId));
+
+    return () => {
+      (replyMsg || replyTicketError) && dispatch(resetResponseMsg());
+    }
+}, [tId, dispatch, replyMsg, replyTicketError]);
 
   return (
     <Container>
