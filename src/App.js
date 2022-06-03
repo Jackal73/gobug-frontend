@@ -2,6 +2,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Entry } from './pages/entry/Entry.page';
+import { Registration } from './pages/registration/Registration.page';
 import { DefaultLayout } from './layout/DefaultLayout';
 import { Dashboard } from './pages/dashboard/Dashboard.page';
 import { AddTicket } from './pages/new-ticket/AddTicket.page';
@@ -17,6 +18,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Entry />
+          </Route>
+          <Route exact path="/registration">
+            <Registration />
           </Route>
 
           <PrivateRoute exact path="/dashboard">

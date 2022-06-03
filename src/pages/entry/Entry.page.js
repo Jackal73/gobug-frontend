@@ -21,7 +21,8 @@ export const Entry = () => {
     {frmLoad === 'login' &&
       <LoginForm
         formSwitcher={formSwitcher}
-      />}
+      />
+    }
 
     {frmLoad === 'reset' &&
       <ResetPassword
@@ -29,7 +30,8 @@ export const Entry = () => {
         handleOnResetSubmit={handleOnResetSubmit}
         formSwitcher={formSwitcher}
         // email={email}
-      />}
+      />
+    }
     </Jumbotron>
   </div>
   );

@@ -115,6 +115,12 @@ export const LoginForm = ({ formSwitcher }) => {
           </a>
         </Col>
       </Row>
+
+      <Row className="py-4">
+        <Col>
+          New Users: <a href="/registration">Register Now</a>
+        </Col>
+      </Row>
     </Container>
   );
 };
