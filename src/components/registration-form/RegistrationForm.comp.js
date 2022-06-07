@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button,
+  Alert, Button,
   Col,
   Container,
   Form,
   Row,
-  Spinner,
-  Alert
+  Spinner
 } from 'react-bootstrap';
-import { newUserRegistration } from './userRegAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { newUserRegistration } from './userRegAction';
 
 const initialState = {
-  name: "",
-  phone: "",
-  email: "",
-  company: "",
-  address: "",
-  password: "",
-  confirmPass: "",
+  name: "Shawn Kebel",
+  phone: "6273837374",
+  email: "essy@eclave.com",
+  company: "gggsjje",
+  address: "esfssd dfgdsf north street",
+  password: "Yoshi1988*",
+  confirmPass: "Yoshi1988*",
 };
 
 const passVerificationError = {
@@ -72,7 +71,24 @@ const RegistrationForm = () => {
   const handleOnSubmit = e => {
     e.preventDefault();
     // console.log(newUser);
-    dispatch(newUserRegistration(newUser));
+    const {
+      name,
+      phone,
+      email,
+      company,
+      address,
+      password
+    } = newUser;
+
+    const newRegistration = {
+      name,
+      phone,
+      email,
+      company,
+      address,
+      password
+    };
+    dispatch(newUserRegistration(newRegistration));
   };
 
   return (
